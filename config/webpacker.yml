@@ -1,0 +1,2 @@
+default: &default
+  extract_css: true
