@@ -1,59 +1,25 @@
-<div id="page-content">
-
-
-  <p style="color: green"><%= notice %></p>
-
-  <h1 class="text-center mt-4">Articles List</h1>
-  <div class="container">
-
-
-
-    <% @articles.each do |article| %>
-      <div class="row justify-content-md-center">
-        <div class="col-8 mt-4">
-          <div class="card text-center shadow p-3 mb-4 big-white rounded">
-            <div class="card-header">
-              By Osvaldo Gac
-            </div>
-            <div class="card-body">
-              <h5 class="card-title"><%= link_to article.title, article_path(article) %></h5>
-              <p class="card-text"><%= truncate(article.description, length: 100) %></p>
-              <%= link_to "View", article, class:"btn btn-outline-success" %>
-              <%= link_to "Edit", edit_article_path(article), class:"btn btn-outline-primary" %>
-              <%= link_to "Delete", article, method: :delete, class:"btn btn-outline-danger" %>
-            </div>
-            <div class="card-footer text-muted">
-              <small> Created <%= time_ago_in_words(article.created_at) %>, Edited <%= time_ago_in_words(article.updated_at) %>    </small>
-            </div>
+<h1 class="text-center mt-4">Articles List</h1>
+<div class="container">
+  <%= link_to "New article", new_article_path, class: "btn btn-outline-info" %>
+  <% @articles.each do |article| %>
+    <div class="row justify-content-md-center">
+      <div class="col-8 mt-4">
+        <div class="card text-center shadow p-3 mb-4 big-white rounded">
+          <div class="card-header">
+            By Osvaldo Gac
+          </div>
+          <div class="card-body">
+            <h5 class="card-title"><%= link_to article.title, article_path(article) %></h5>
+            <p class="card-text"><%= truncate(article.description, length: 100) %></p>
+            <%= link_to "View", article, class:"btn btn-outline-success" %>
+            <%= link_to "Edit", edit_article_path(article), class:"btn btn-outline-primary" %>
+            <%= link_to "Delete", article, method: :delete, class:"btn btn-outline-danger" %>
+          </div>
+          <div class="card-footer text-muted">
+            <small> Created <%= time_ago_in_words(article.created_at) %>, Edited <%= time_ago_in_words(article.updated_at) %>    </small>
           </div>
         </div>
       </div>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 </div>
-
-<div id="articles">
-  <table>
-    <thead>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Actions</th>
-    </thead>
-    <tbody>
-      <% @articles.each do |article| %>
-        <% @article = article %>
-        <tr>
-          <td><%= article.title %></td>
-          <td><%= article.description %></td>
-          <td><%= link_to "Show", article %></td>
-          <td><%= button_to "Delete", article, method: :delete %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
-<p></p>
-
-<%= link_to "New article", new_article_path %>
-<p></p>
-<%= link_to "Home", root_path %>
