@@ -53,7 +53,6 @@ class ArticlesController < ApplicationController
   # DELETE /articles/1 or /articles/1.json
   def destroy
     @article.destroy
-
     respond_to do |format|
       flash[:notice] = "Article was successfully destroyed."
       format.html { redirect_to articles_url }
