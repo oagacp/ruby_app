@@ -3,5 +3,14 @@
   <img src="<%= asset_path('Rostro.jpg') %>" class="rounded mx-auto d-block shadow " alt="Profile photo" style="width:140px;height:210px;">
 </div>
 <% user = @user %>
+<div class="text-center mt-4">
+  <%= link_to "Edit your profile", edit_user_path(@user), class: "btn btn-outline-info" %>
+</div>
 <h2 class="text-center mt-4"> Articles</h2>
+<p>
+  <%= will_paginate @articles, class:"apple_pagination"%>
+</p>
 <%= render "articles/article" %>
+<p>
+  <%= will_paginate @articles, class:"apple_pagination"%>
+</p>

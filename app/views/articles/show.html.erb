@@ -3,7 +3,9 @@
   <div class="col-8 mt-4">
     <div class="card shadow p-3 mb-4 big-white rounded">
       <div class="card-header text-center">
-        By <%= @article.user.fname + " " + @article.user.lname if @article.user %>
+        <% if @article.user %>
+          By <%= link_to @article.user.fname + " " + @article.user.lname, @article.user %>
+        <% end %>
       </div>
       <div class="card-body">
         <div class="card-text text-left"><%= simple_format(@article.description) %></div>

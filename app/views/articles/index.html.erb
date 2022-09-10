@@ -1,2 +1,8 @@
-<h1 class="text-center mt-4">Articles List</h1>
+<h2 class="text-center mt-4">Articles List</h2>
+<p>
+  <%= will_paginate @articles, class:"apple_pagination"%>
+</p>
 <%= render "article" %>
+<p>
+  <%= will_paginate @articles, class:"apple_pagination"%>
+</p>

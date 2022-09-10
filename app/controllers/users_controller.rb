@@ -8,11 +8,15 @@ class UsersController < ApplicationController
 
   # GET /users/1 or /users/1.json
   def show
-    @articles = @user.articles
+    @articles = @user.articles.paginate(page: params[:page], per_page: 2)
   end
 
   # GET /users/1/edit
   def edit
+  end
+
+  def index
+    @users = User.paginate(page: params[:page], per_page: 2)
   end
 
   def update
@@ -35,9 +39,11 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         flash[:notice] = "Welcome to Ruby Blog #{@user.username}, you have successfully sign up."
-        redirect_to articles_path
+        format.html { redirect_to user_url(@user) }
+        format.json { render :show, status: :created, location: @user }
       else
-        render :new
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
   end
