@@ -7,12 +7,21 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <%= link_to "Articles", articles_path, class:"nav-link active" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "Signup", signup_path, class: "nav-link" %>
-        </li>
+        <% if logged_in? %>
+          <li class="nav-item">
+            <%= link_to current_user.username, user_path(current_user), class:"nav-link user" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Logout", logout_path, class:"nav-link active", method: :delete %>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to "Log in", login_path, class:"nav-link active" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Sign up", signup_path, class:"nav-link active" %>
+          </li>
+        <% end %>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Options
@@ -21,7 +30,7 @@
             <li><%= link_to "New Article", new_article_path, class: "dropdown-item" %></li>
             <li><%= link_to "Users in the App", users_path, class: "dropdown-item" %></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <li><%= link_to "Articles", articles_path, class: "dropdown-item" %></li>
           </ul>
         </li>
         <li class="nav-item">

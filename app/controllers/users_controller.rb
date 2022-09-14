@@ -38,6 +38,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     respond_to do |format|
       if @user.save
+        session[:user_id] = @user.id
         flash[:notice] = "Welcome to Ruby Blog #{@user.username}, you have successfully sign up."
         format.html { redirect_to user_url(@user) }
         format.json { render :show, status: :created, location: @user }
@@ -52,7 +53,6 @@ end
 # DELETE /users/1 or /users/1.json
 def destroy
   @user.destroy
-
   respond_to do |format|
     flash[:notice] = "#{@user.username} was successfully destroyed."
     format.html { redirect_to articles_url }
