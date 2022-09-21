@@ -7,10 +7,27 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <%= link_to "Articles", articles_path, class:"nav-link user" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Users", users_path, class:"nav-link user" %>
+        </li>
         <% if logged_in? %>
-          <li class="nav-item">
-            <%= link_to current_user.username, user_path(current_user), class:"nav-link user" %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <%= "(Admin) " if current_user.admin? %> <%= current_user.username %>
+            </a>
+            <ul class="dropdown-menu">
+              <li><%= link_to "New Article", new_article_path, class: "dropdown-item" %></li>
+              <li><%= link_to "Edit profile", edit_user_path(current_user), class: "dropdown-item" %></li>
+              <li><%= link_to "Delete profile", user_path(current_user), method: :delete, class: "dropdown-item text_danger", data: {confirm: "Are you sure delete you profile?"} %></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><%= link_to "Articles", articles_path, class: "dropdown-item" %></li>
+            </ul>
           </li>
+        <% end %>
+        <% if logged_in? %>
           <li class="nav-item">
             <%= link_to "Logout", logout_path, class:"nav-link active", method: :delete %>
           </li>
@@ -22,17 +39,6 @@
             <%= link_to "Sign up", signup_path, class:"nav-link active" %>
           </li>
         <% end %>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Options
-          </a>
-          <ul class="dropdown-menu">
-            <li><%= link_to "New Article", new_article_path, class: "dropdown-item" %></li>
-            <li><%= link_to "Users in the App", users_path, class: "dropdown-item" %></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><%= link_to "Articles", articles_path, class: "dropdown-item" %></li>
-          </ul>
-        </li>
         <li class="nav-item">
           <a class="nav-link disabled">Disabled</a>
         </li>
