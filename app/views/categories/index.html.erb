@@ -1,0 +1,24 @@
+<h2 class="text-center mt-4"> Ruby App Categories</h2>
+<p>
+  <%= will_paginate @categories, class:"apple_pagination"%>
+</p>
+  <div class="container">
+    <% @categories.each do |category| %>
+      <div class="row justify-content-md-center">
+        <div class="col-5 mt-2">
+          <div class="card text-center shadow p-3 mb-1 big-white rounded">
+            <div class="card-body">
+              <h5 class="card-title"><%= link_to category.name, category_path(category) %></h5>
+            </div>
+            <p class="mt-1" ><%= pluralize(category.articles.count, "article") %> published</p>
+            <div class="card-footer text-muted">
+              <small> Created <%= time_ago_in_words(category.created_at) %>, Edited <%= time_ago_in_words(category.updated_at) %>    </small>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<p>
+  <%= will_paginate @categories, class:"apple_pagination"%>
+</p>

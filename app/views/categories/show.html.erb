@@ -1,0 +1,14 @@
+<h2 class="text-center mt-4"> Category <%= @category.name %> </h2>
+<div class="text-center">
+  <% if logged_in? && current_user.admin? %>
+    <%= link_to "Edit Category name", edit_category_path(@category), class:"btn btn-outline-primary" %>
+  <% end %>
+</div>
+<h2 class="text-center mt-4"> Articles</h2>
+<p>
+  <%= will_paginate @articles, class:"apple_pagination"%>
+</p>
+<%= render "articles/article" %>
+<p>
+  <%= will_paginate @articles, class:"apple_pagination"%>
+</p>

@@ -1,0 +1,4 @@
+<h1 class="text-center mt-4">Editing <%= @category.name %> </h1>
+<% if logged_in? && current_user.admin? %>
+  <%= render "form", category: @category %>
+<% end %>
